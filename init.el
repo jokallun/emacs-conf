@@ -77,8 +77,7 @@
 (when window-system
   (load-theme 'solarized-dark t)
   (when (eq window-system 'w32) ;; windows colors
-    (load-theme 'sanityinc-solarized-dark t))
-  )
+    (load-theme 'zenburn t)))
  
 (require 'rainbow-delimiters)
 (global-rainbow-delimiters-mode)
