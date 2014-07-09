@@ -74,10 +74,12 @@
 ;; (tool-bar-mode 0)
 (idle-highlight-mode nil)
 
-(when window-system
-  (load-theme 'solarized-dark t)
-  (when (eq window-system 'w32) ;; windows colors
-    (load-theme 'zenburn t)))
+(if (eq window-system 'w32)
+    (load-theme 'monokai t) ;; windows 
+  (when window-system  ;; OSX or linux
+    (load-theme 'solarized-dark t)))
+
+
  
 (require 'rainbow-delimiters)
 (global-rainbow-delimiters-mode)
@@ -167,7 +169,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(custom-safe-themes (quote ("8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "9370aeac615012366188359cb05011aea721c73e1cb194798bc18576025cabeb" "e16a771a13a202ee6e276d06098bc77f008b73bbac4d526f160faa2d76c1dd0e" "8eef22cd6c122530722104b7c82bc8cdbb690a4ccdd95c5ceec4f3efa5d654f5" default)))
+ '(custom-safe-themes (quote ("60f04e478dedc16397353fb9f33f0d895ea3dab4f581307fbf0aa2f07e658a40" "4aee8551b53a43a883cb0b7f3255d6859d766b6c5e14bcb01bed572fcbef4328" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "9370aeac615012366188359cb05011aea721c73e1cb194798bc18576025cabeb" "e16a771a13a202ee6e276d06098bc77f008b73bbac4d526f160faa2d76c1dd0e" "8eef22cd6c122530722104b7c82bc8cdbb690a4ccdd95c5ceec4f3efa5d654f5" default)))
  '(nxml-child-indent 4 t))
  
 
