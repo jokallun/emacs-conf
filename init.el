@@ -36,10 +36,10 @@
 
 ;; Add in your own as you wish:
 (defvar my-packages '(starter-kit starter-kit-lisp starter-kit-bindings
-				  elpy workgroups rainbow-delimiters rainbow-mode
-                                  solarized-theme zenburn-theme ess
+				  elpy workgroups rainbow-delimiters
+                                  color-theme-sanityinc-solarized color-theme-monokai ess
                                   clojure-mode clojure-test-mode cider
-                                  autopair)
+                                  autopair )
   "A list of packages to ensure are installed at launch.")
 
 (dolist (p my-packages)
@@ -75,8 +75,9 @@
 (idle-highlight-mode nil)
 
 (when window-system
-  (load-theme 'solarized-dark t)
-  ;; (load-theme 'zenburn t)
+  (load-theme 'sanityinc-solarized-dark t)
+  ;; (when (eq window-system 'w32) ;; windows colors
+  ;;   (load-theme 'monokai t))
   )
  
 (require 'rainbow-delimiters)
@@ -84,7 +85,8 @@
 
 
 ;; ==== Python
-'(python-shell-interpreter "~/anaconda/bin/ipython")
+(when (eq window-system 'ns)  ;; for OSX anaconda
+  '(python-shell-interpreter "~/anaconda/bin/ipython"))
 (elpy-enable)
 (elpy-use-ipython)
 
