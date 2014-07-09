@@ -75,9 +75,9 @@
 (idle-highlight-mode nil)
 
 (when window-system
-  (load-theme 'sanityinc-solarized-dark t)
-  ;; (when (eq window-system 'w32) ;; windows colors
-  ;;   (load-theme 'monokai t))
+  (load-theme 'solarized-dark t)
+  (when (eq window-system 'w32) ;; windows colors
+    (load-theme 'sanityinc-solarized-dark t))
   )
  
 (require 'rainbow-delimiters)
@@ -168,7 +168,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(custom-safe-themes (quote ("9370aeac615012366188359cb05011aea721c73e1cb194798bc18576025cabeb" "e16a771a13a202ee6e276d06098bc77f008b73bbac4d526f160faa2d76c1dd0e" "8eef22cd6c122530722104b7c82bc8cdbb690a4ccdd95c5ceec4f3efa5d654f5" default)))
+ '(custom-safe-themes (quote ("8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "9370aeac615012366188359cb05011aea721c73e1cb194798bc18576025cabeb" "e16a771a13a202ee6e276d06098bc77f008b73bbac4d526f160faa2d76c1dd0e" "8eef22cd6c122530722104b7c82bc8cdbb690a4ccdd95c5ceec4f3efa5d654f5" default)))
  '(nxml-child-indent 4 t))
  
 
