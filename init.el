@@ -50,20 +50,12 @@
 (blink-cursor-mode t)
 (autopair-global-mode)
 (setenv "LC_CTYPE" "UTF-8")
+(ido-mode 1)
 
-
-;; OSX settings
+;;==== OSX settings
 (when (eq window-system 'ns) 
   (setq mac-command-modifier 'meta)
   (setq mac-option-modifier nil))
-
-;; (require 'ido-vertical-mode)
-(ido-mode 1)
-;; (ido-vertical-mode 0)
-
-;; ==== Line numbers
-;; (setq linum-format "%4d\u2502")
-;; (global-linum-mode 1)
 
 
 ;; ==== Appearence 
@@ -80,14 +72,14 @@
     (load-theme 'sanityinc-solarized-dark t))
   )
  
-(require 'rainbow-delimiters)
-;; (global-rainbow-delimiters-mode)
-
 
 ;; ==== Projectile
 (projectile-global-mode)
-(setq projectile-switch-project-action 'projectile-find-dir)
+(setq projectile-switch-project-action 'projectile-dired)
 (setq projectile-remember-window-configs t)
+;;(define-key projectile-mode-map "M-2" 'projectile-switch-to-buffer)
+(eval-after-load 'projectile 
+  '(define-key projectile-mode-map (kbd "M-2") 'projectile-switch-to-buffer))
 
 ;; ==== Python
 (when (eq window-system 'ns)  ;; for OSX anaconda
@@ -103,69 +95,22 @@
 ;; nrepl
 (add-hook 'nrepl-interaction-mode-hook
           'nrepl-turn-on-eldoc-mode)
-;; (setq nrepl-hide-special-buffers t)
-;; (setq nrepl-popup-stacktraces nil)
-;; (setq nrepl-popup-stacktraces-in-repl t)
-;; (add-to-list 'same-window-buffer-names "*nrepl*")
 (add-hook 'nrepl-mode-hook 'subword-mode)
 (add-hook 'nrepl-mode-hook 'paredit-mode)
-
-;; ugly hack fix
-;; (custom-set-faces
-;;  '(slime-repl-output-face ((t (:foreground "#cb4b16" :italic t :bold t)))))
 
 
 ;; ==== ESS
 (require 'ess-site)
 
-;; ==== Workgroups
-(require 'workgroups)
-(setq wg-prefix-key (kbd "C-z"))
-(workgroups-mode 1)
-
 
 ;; ==== Key-bindings
-;;(require 'starter-kit-bindings)
-;; Set my keybindings so that they're ALWAYS on
-(defvar my-keys-minor-mode-map (make-keymap) "my-keys-minor-mode keymap.")
+(global-set-key (kbd  "M-1") 'ido-switch-buffer)
+(global-set-key (kbd  "C-x C-m") 'call-last-kbd-macro)
+(global-set-key (kbd  "<M-return>") 'hippie-expand)
+(global-set-key (kbd "C-c C-h") 'idle-highlight-mode)
+(global-set-key (kbd  "M-n") 'forward-paragraph)
+(global-set-key (kbd  "M-p") 'backward-paragraph)
 
-(define-key my-keys-minor-mode-map (kbd "M-;") 'comment-or-uncomment-region)
-(define-key my-keys-minor-mode-map (kbd "C-c C-v") 'mark-sexp)
-
-(define-key my-keys-minor-mode-map (kbd "C-c s") 'shell)
-
-
-;;(define-key my-keys-minor-mode-map (kbd "C-c C-s") 'slime-connect)
-(define-key my-keys-minor-mode-map (kbd "C-c C-h") 'idle-highlight-mode)
-;;(define-key my-keys-minor-mode-map (kbd  "M-.") 'find-tag)
-
-(define-key my-keys-minor-mode-map [f2] 'other-window)
-(define-key my-keys-minor-mode-map [f1] 'previous-multiframe-window)
-(define-key my-keys-minor-mode-map [(f3)] 'javadoc-lookup)  
-(define-key my-keys-minor-mode-map [(shift f3)] 'javadoc-help)    
-
-(define-key my-keys-minor-mode-map  (kbd  "C-c C-m") 'execute-extended-command)
-;; (define-key my-keys-minor-mode-map (kbd  "C-q") 'backward-kill-word)
-;; (define-key my-keys-minor-mode-map (kbd  "M-n") 'forward-paragraph)
-;; (define-key my-keys-minor-mode-map (kbd  "M-p") 'backward-paragraph)
-
-;;(define-key my-keys-minor-mode-map (kbd  "C-x C-m") 'call-last-kbd-macro)
-
-(define-key my-keys-minor-mode-map (kbd  "M-1") 'ido-switch-buffer)
-(define-key my-keys-minor-mode-map (kbd  "M-2") 'ido-find-file)
-
-(define-key my-keys-minor-mode-map (kbd  "C-z C-h") 'ess-display-help-on-object)
-(define-key my-keys-minor-mode-map (kbd  "<M-return>") 'hippie-expand)
-
-(define-minor-mode my-keys-minor-mode
-  "A minor mode so that my key settings override annoying major modes."
-  t " my-keys" 'my-keys-minor-mode-map)
-(my-keys-minor-mode 1)
-
-(defun my-keys-minibuffer-setup-hook ()
-  (my-keys-minor-mode 0))
-
-(add-hook 'minibuffer-setup-hook 'my-keys-minibuffer-setup-hook)
 
 
 (defun json-format ()
@@ -181,24 +126,7 @@
  '(coffee-tab-width 2)
  '(js-indent-level 2)
  '(nxml-child-indent 4 t)
- '(custom-safe-themes (quote ("8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "9370aeac615012366188359cb05011aea721c73e1cb194798bc18576025cabeb" "e16a771a13a202ee6e276d06098bc77f008b73bbac4d526f160faa2d76c1dd0e" "8eef22cd6c122530722104b7c82bc8cdbb690a4ccdd95c5ceec4f3efa5d654f5" default)))
-
-)
+ '(custom-safe-themes (quote ("8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "9370aeac615012366188359cb05011aea721c73e1cb194798bc18576025cabeb" "e16a771a13a202ee6e276d06098bc77f008b73bbac4d526f160faa2d76c1dd0e" "8eef22cd6c122530722104b7c82bc8cdbb690a4ccdd95c5ceec4f3efa5d654f5" default))))
  
 (server-start)
-;; ====Window dedication
-;; (defun toggle-current-window-dedication ()
-;;  (interactive)
-;;  (let* ((window    (selected-window))
-;;         (dedicated (window-dedicated-p window)))
-;;    (set-window-dedicated-p window (not dedicated))
-;;    (message "Window %sdedicated to %s"
-;;             (if dedicated "no longer " "")
-;;             (buffer-name))))
-;;(global-set-key [pause] 'toggle-current-window-dedication)
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+
