@@ -39,7 +39,7 @@
 				  elpy workgroups rainbow-delimiters
                                   color-theme-sanityinc-solarized color-theme-monokai ess
                                   clojure-mode clojure-test-mode cider
-                                  autopair )
+                                  autopair projectile)
   "A list of packages to ensure are installed at launch.")
 
 (dolist (p my-packages)
@@ -81,8 +81,13 @@
   )
  
 (require 'rainbow-delimiters)
-(global-rainbow-delimiters-mode)
+;; (global-rainbow-delimiters-mode)
 
+
+;; ==== Projectile
+(projectile-global-mode)
+(setq projectile-switch-project-action 'projectile-find-dir)
+(setq projectile-remember-window-configs t)
 
 ;; ==== Python
 (when (eq window-system 'ns)  ;; for OSX anaconda
@@ -163,15 +168,24 @@
 (add-hook 'minibuffer-setup-hook 'my-keys-minibuffer-setup-hook)
 
 
+(defun json-format ()
+  (interactive)
+  (save-excursion
+    (shell-command-on-region (mark) (point) "python -m json.tool" (buffer-name) t)))
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(coffee-tab-width 2)
+ '(js-indent-level 2)
+ '(nxml-child-indent 4 t)
  '(custom-safe-themes (quote ("8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "9370aeac615012366188359cb05011aea721c73e1cb194798bc18576025cabeb" "e16a771a13a202ee6e276d06098bc77f008b73bbac4d526f160faa2d76c1dd0e" "8eef22cd6c122530722104b7c82bc8cdbb690a4ccdd95c5ceec4f3efa5d654f5" default)))
- '(nxml-child-indent 4 t))
- 
 
+)
+ 
+(server-start)
 ;; ====Window dedication
 ;; (defun toggle-current-window-dedication ()
 ;;  (interactive)
