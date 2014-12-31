@@ -72,6 +72,9 @@
     (load-theme 'sanityinc-solarized-dark t))
   )
  
+;;==== ibuffer
+(global-set-key (kbd "C-x C-b") 'ibuffer)
+(autoload 'ibuffer "ibuffer" "List buffers." t)
 
 ;; ==== Projectile
 (projectile-global-mode)
@@ -110,6 +113,9 @@
 (global-set-key (kbd "C-c C-h") 'idle-highlight-mode)
 (global-set-key (kbd  "M-n") 'forward-paragraph)
 (global-set-key (kbd  "M-p") 'backward-paragraph)
+
+(global-set-key (kbd "C-ä") 'enlarge-window-horizontally)
+(global-set-key (kbd "C-'") 'enlarge-window)
 
 
 
