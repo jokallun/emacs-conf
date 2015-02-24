@@ -87,8 +87,14 @@
 ;; ==== Python
 (when (eq window-system 'ns)  ;; for OSX anaconda
   '(python-shell-interpreter "~/anaconda/bin/ipython"))
+(require 'flycheck-pyflakes)
+(add-hook 'python-mode-hook 'flycheck-mode)
+(add-to-list 'flycheck-disabled-checkers 'python-flake8)
+(add-to-list 'flycheck-disabled-checkers 'python-pylint)
 (elpy-enable)
 (elpy-use-ipython)
+(define-key python-mode-map (kbd "RET")
+  'newline-and-indent)
 
 
 ;; ==== Clojure
@@ -117,6 +123,48 @@
 (global-set-key (kbd "C-ä") 'enlarge-window-horizontally)
 (global-set-key (kbd "C-'") 'enlarge-window)
 
+(defvar enlarge-window-char ?+)
+(defvar shrink-window-char ?-)
+
+(defun resize-window-horizontally (&optional arg)
+  "Interactively resize the selected window.
+  Repeatedly prompt whether to enlarge or shrink the window until the
+  response is neither `enlarge-window-char' or `shrink-window-char'.
+  When called with a prefix arg, resize the window by ARG lines."
+  (interactive "p")
+  (let ((prompt (format "Enlarge/Shrink window (%c/%c)? "
+                        enlarge-window-char shrink-window-char))
+        response)
+    (while (progn
+             (setq response (read-event prompt))
+             (cond ((equal response enlarge-window-char)
+                    (enlarge-window-horizontally arg)
+                    t)
+                   ((equal response shrink-window-char)
+                    (enlarge-window-horizontally (- arg))
+                    t)
+                   (t nil))))
+    (push response unread-command-events)))
+
+(defun resize-window-vertically (&optional arg)
+  "Interactively resize the selected window.
+  Repeatedly prompt whether to enlarge or shrink the window until the
+  response is neither `enlarge-window-char' or `shrink-window-char'.
+  When called with a prefix arg, resize the window by ARG lines."
+  (interactive "p")
+  (let ((prompt (format "Enlarge/Shrink window (%c/%c)? "
+                        enlarge-window-char shrink-window-char))
+        response)
+    (while (progn
+             (setq response (read-event prompt))
+             (cond ((equal response enlarge-window-char)
+                    (enlarge-window arg)
+                    t)
+                   ((equal response shrink-window-char)
+                    (enlarge-window (- arg))
+                    t)
+                   (t nil))))
+    (push response unread-command-events)))
 
 
 (defun json-format ()
@@ -124,15 +172,31 @@
   (save-excursion
     (shell-command-on-region (mark) (point) "python -m json.tool" (buffer-name) t)))
 
+(defun dos2unix ()
+      "Not exactly but it's easier to remember"
+      (interactive)
+      (set-buffer-file-coding-system 'unix 't))
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(coffee-tab-width 2)
+ '(custom-safe-themes
+   (quote
+    ("8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "9370aeac615012366188359cb05011aea721c73e1cb194798bc18576025cabeb" "e16a771a13a202ee6e276d06098bc77f008b73bbac4d526f160faa2d76c1dd0e" "8eef22cd6c122530722104b7c82bc8cdbb690a4ccdd95c5ceec4f3efa5d654f5" default)))
  '(js-indent-level 2)
- '(nxml-child-indent 4 t)
- '(custom-safe-themes (quote ("8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "9370aeac615012366188359cb05011aea721c73e1cb194798bc18576025cabeb" "e16a771a13a202ee6e276d06098bc77f008b73bbac4d526f160faa2d76c1dd0e" "8eef22cd6c122530722104b7c82bc8cdbb690a4ccdd95c5ceec4f3efa5d654f5" default))))
+ '(magit-use-overlays nil)
+ '(nxml-child-indent 4 t))
  
 (server-start)
 
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(default ((t (:inherit nil :stipple nil :slant normal :weight normal :height 120 :width normal :foundry "nil" :family "source code pro")))))
+
+;;  '(default ((t (:inherit nil :stipple nil :background "#002b36" :foreground "#839496" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 120 :width normal :foundry "nil" :family "source code pro"))))
