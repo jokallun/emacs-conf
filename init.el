@@ -36,7 +36,7 @@
 
 ;; Add in your own as you wish:
 (defvar my-packages '(starter-kit starter-kit-lisp starter-kit-bindings
-				  elpy workgroups rainbow-delimiters
+				  elpy workgroups rainbow-delimiters magit
                                   color-theme-sanityinc-solarized color-theme-monokai ess
                                   clojure-mode clojure-test-mode cider
                                   autopair projectile)
@@ -51,6 +51,8 @@
 (autopair-global-mode)
 (setenv "LC_CTYPE" "UTF-8")
 (ido-mode 1)
+(setq split-height-threshold 200)
+(setq split-width-threshold 200)
 
 ;;==== OSX settings
 (when (eq window-system 'ns) 
@@ -111,6 +113,7 @@
 ;; ==== ESS
 (require 'ess-site)
 
+(require 'urlenc)
 
 ;; ==== Key-bindings
 (global-set-key (kbd  "M-1") 'ido-switch-buffer)
