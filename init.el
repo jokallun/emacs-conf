@@ -49,10 +49,11 @@
 ;; ==== Behavior
 (blink-cursor-mode t)
 (autopair-global-mode)
-(setenv "LC_CTYPE" "UTF-8")
+(setenv "LC_CTYPE" "fi.UTF-8")
 (ido-mode 1)
 (setq split-height-threshold 200)
 (setq split-width-threshold 200)
+
 
 ;;==== OSX settings
 (when (eq window-system 'ns) 
@@ -87,8 +88,8 @@
   '(define-key projectile-mode-map (kbd "M-2") 'projectile-switch-to-buffer))
 
 ;; ==== Python
-(when (eq window-system 'ns)  ;; for OSX anaconda
-  '(python-shell-interpreter "~/anaconda/bin/ipython"))
+;; (when (eq window-system 'ns)  ;; for OSX anaconda
+;;   '(python-shell-interpreter "~/anaconda2/bin/ipython"))
 (require 'flycheck-pyflakes)
 (add-hook 'python-mode-hook 'flycheck-mode)
 (add-to-list 'flycheck-disabled-checkers 'python-flake8)
