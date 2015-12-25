@@ -202,5 +202,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(default ((t (:inherit nil :stipple nil :slant normal :weight normal :height 120 :width normal :foundry "nil" :family "source code pro")))))
-
 ;;  '(default ((t (:inherit nil :stipple nil :background "#002b36" :foreground "#839496" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 120 :width normal :foundry "nil" :family "source code pro"))))
+
+;; package-activated-list 25.12.2015
+;; (ag s dash auto-complete popup autopair clojure-test-mode cider queue pkg-info epl dash clojure-mode clojure-mode coffee-mode color-theme-monokai color-theme color-theme-sanityinc-solarized elpy yasnippet pyvenv idomenu highlight-indentation find-file-in-project company ess flx-ido flx flycheck-pyflakes flycheck let-alist pkg-info epl dash fuzzy highlight-indentation ido-vertical-mode idomenu iedit json-reformat let-alist markdown-mode markup-faces nose popup projectile pkg-info epl dash s pyvenv queue rainbow-delimiters rainbow-mode s solarized-theme dash starter-kit-bindings starter-kit magit magit-popup dash async git-commit with-editor dash async dash with-editor dash async dash async ido-ubiquitous smex find-file-in-project idle-highlight-mode paredit starter-kit-lisp elisp-slime-nav starter-kit magit magit-popup dash async git-commit with-editor dash async dash with-editor dash async dash async ido-ubiquitous smex find-file-in-project idle-highlight-mode paredit urlenc virtualenv with-editor dash async workgroups yasnippet zenburn-theme)
